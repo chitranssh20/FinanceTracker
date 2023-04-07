@@ -1,0 +1,19 @@
+{
+  "name": "finance_tracker",
+  "version": "1.0.0",
+  "description": "This is a personal finance tracker in MERN Stack",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chitranssh20/FinanceTracker.git"
+  },
+  "author": "Chitranssh Saxena",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chitranssh20/FinanceTracker/issues"
+  },
+  "homepage": "https://github.com/chitranssh20/FinanceTracker#readme"
+}
