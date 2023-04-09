@@ -50,9 +50,9 @@ function ResponsiveSidebar() {
         { text: 'Savings', link: '/savings' },
         { text: 'Investments', link: '/investments' },
         { text: 'Debt', link: '/debt' },
-        { text: 'Net Worth', link: '/net-worth' },
+        { text: 'Net Worth', link: '/net-worth' }, //not a collection
         { text: 'Financial Goals', link: '/financial-goals' },
-        { text: 'Reports', link: '/reports' },
+        { text: 'Reports', link: '/reports' }, // not a collection
         { text: 'Alerts', link: '/alerts' }
     ]
     const drawer = (
