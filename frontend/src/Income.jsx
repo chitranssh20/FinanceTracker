@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Tabs, Tab, Box, Select, MenuItem } from '@mui/material';
 import { useMediaQuery } from 'react-responsive';
 
-//Income categories will be fetched from database
+//Income categories will be fetched from database to show in tabs
 const Income = () => {
   const isMobile = useMediaQuery({ maxWidth: 767 });
   const [value, setValue] = useState(0);
