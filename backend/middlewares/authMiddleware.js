@@ -16,7 +16,8 @@ const authTokenMiddleware = async(req, res, next) => {
     try {
         
         let decoded = jwt.verify(token, process.env.JWT_KEY, { algorithms: ['HS256'] });
-        req.user = decoded;
+        req.user = {email: decoded.email, iat: decoded.iat}
+
         next();        
     }
     catch (error){

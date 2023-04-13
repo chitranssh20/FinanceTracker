@@ -23,19 +23,19 @@ describe("Add Income Category test", ()=>{
         expect(response.body.response).toBe("Authorization header not present")
     })
 
-    test("Inavlid Token", async() => {
+    test("Invalid Token", async() => {
         const response = await request(app).post('/income/addCategory').set('authorization', "JWT " +token + "invalid").send({data: 'payload'})
 
         expect(response.statusCode).toBe(400) 
         expect(response.body.response).toBe("Invalid Token")
     })
 
-    test("Adding Income Category", async()=>{
-            const response = await request(app).post('/income/addCategory').set('authorization', "JWT " +token).send({num: '55'}); 
+    test("Adding Income Category  without category , empty or wrong data", async()=>{
+            const response = await request(app).post('/income/addCategory').set('authorization', "JWT " +token).send({categor: 'Salary'}); 
+            expect(response.status).toBe(204)
+            expect(response.body.response).toBe("Missing Data")
 
-            expect(response.status).toBe(200)
-
-    }, 15000)
+    })
 
 })
 

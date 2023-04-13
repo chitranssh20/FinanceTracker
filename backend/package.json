@@ -4,7 +4,7 @@
   "description": "This is a personal finance tracker in MERN Stack",
   "main": "index.js",
   "scripts": {
-    "test": "jest --detectOpenHandles"
+    "test": "jest --detectOpenHandles --coverage"
   },
   "repository": {
     "type": "git",
