@@ -4,28 +4,18 @@ const User = require('../Models/user');
 const path = require('path');
 require('dotenv').config({ path: path.join(__dirname, '..', '.env') });
 
-console.log(__dirname)
 const router = express.Router()
+
+
 const genToken = (payload) => {
-
- 
-
-    const {email, password} = payload
-    // console.log('port ' + process.env.PORT)
-    // console.log('key'  + process.env.JWT_KEY)
-        let token = jwt.sign(payload, process.env.JWT_KEY); 
-        console.log(token)
-        return token
-}
+    const token = jwt.sign(payload, process.env.JWT_KEY, { algorithm: 'HS256' });
+    return token;
+  };
+  
 
  let ourToken = genToken({email: 'sample@sample.com', password: 'password'})
 
 
-const decodeToken = (token) => {
-    let decoded = jwt.verify(token, process.env.JWT_KEY)
-    console.log('decoded Details', decoded)
-}
-decodeToken(ourToken);
 
 
 router.post('/register', async (req, res) => {
@@ -33,16 +23,16 @@ router.post('/register', async (req, res) => {
         const user = new User(req.body)
         
         if(req.body.name === undefined || req.body.email == undefined || req.body.password === undefined){
-            return res.status(400).send({"response": "Some fields are missing"})
+            return res.status(400).send({response: "Some fields are missing"})
         }
 
-
         const response = await user.save()
-        res.send(req.body)
+        let registrationToken = genToken({email: req.body.email, password: req.body.password})
+        res.status(200).json({response: "User has been registered", token: registrationToken})
     }  
     catch (error) {
         if(error.code === 11000){
-            res.status(500).send("Email Id already exists")
+            res.status(500).send({response: "Email Id already exists"})
         }
     }
 })
@@ -62,7 +52,8 @@ router.post('/login', async(req, res) => {
 
             const isMatch = await user.comparedPassword(password);
             if(isMatch){
-                res.status(200).json({response: "Successfully Logged In",  passwordMatched: isMatch})
+                let loginToken = genToken({email: req.body.email, passsword: req.body.password})
+                res.status(200).json({response: "Successfully Logged In",  passwordMatched: isMatch, token: loginToken})
                 
             }
             else{
