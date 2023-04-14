@@ -8,6 +8,8 @@ const incomeRouter = express.Router()
 incomeRouter.post('/addCategory', authMiddleware, async(req, res) => {
         console.log(req.body.category)
         if (!req.body.category || req.body.category === undefined) {
+          // return res.status(200).send({ response: "Check" });
+          return res.status(204).send({ response: "Missing Data" });
           return res.status(204).json({response: "Missing Data" });
         }
       
@@ -19,7 +21,6 @@ incomeRouter.post('/addCategory', authMiddleware, async(req, res) => {
           // TODO: Handle case where category is not null for that user
         }
       
-        res.status(200).send({ response: "Check" });
       });
       
 
