@@ -13,7 +13,6 @@ const genToken = (payload) => {
   };
   
 
- let ourToken = genToken({email: 'sample@sample.com', password: 'password'})
 
 
 

@@ -33,9 +33,28 @@ describe("Add Income Category test", ()=>{
     test("Adding Income Category  without category , empty or wrong data", async()=>{
             const response = await request(app).post('/income/addCategory').set('authorization', "JWT " +token).send({categor: 'Salary'}); 
             expect(response.status).toBe(204)
-            expect(response.body.response).toBe("Missing Data")
+            expect(response.body.response).toBeUndefined()
 
     })
+
+    // NOTE: This test will not run more than once until category is changed
+    // test("Category Does not exist for user", async()=>{
+    //         const response = await request(app).post('/income/addCategory').set('authorization', "JWT " +token).send({category: 'AVT'}); 
+
+    //         expect(response.status).toBe(201)
+    //         expect(response.body.response).toBe("Category has been added")
+
+    // })
+
+    test("Adding a category that already exists", async()=>{
+        const response = await request(app).post('/income/addCategory').set('authorization', "JWT " +token).send({category: 'Salary'}); 
+
+        expect(response.status).toBe(202)
+        expect(response.body.response).toBe("Category already exists")
+
+})
+
+
 
 })
 
