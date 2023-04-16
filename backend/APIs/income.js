@@ -15,18 +15,6 @@ incomeRouter.post('/addCategory', authMiddleware, async(req, res) => {
           return res.status(204).json({response: "Missing Data" });
 =======
 
-
-
-
-
-
-
-
-
-
-
-
-
 incomeRouter.post('/addCategory', authMiddleware, async (req, res) => {
 
   if (!req.body.category || req.body.category === undefined) {
@@ -104,6 +92,31 @@ incomeRouter.post('/addCategory', authMiddleware, async (req, res) => {
 });
 
 >>>>>>> current
+
+// TODO: Write API to get data  
+
+incomeRouter.get('/getData', authMiddleware, async (req, res) => {
+  try {
+
+    let user = await User.findOne({ email: req.user.email });
+    let userId = user._id 
+
+    let incomeData = await Income.findOne({
+      user: userId  
+    }); 
+
+    let incomeCategories = incomeData.categories
+    console.log(incomeCategories)
+    // TODO: Map through all the categories in incomeCategories and get the corresponding transactions in a structured json format to send as a resposne to the client.
+
+    return res.status(200).json({response: "Data"})
+  } catch (error) {
+  console.log(error)
+  return  res.status(500).json({ resposne: "Something is broken" })
+}
+
+})
+// TODO: Copy APIs to other similar URLs 
 
 
 
